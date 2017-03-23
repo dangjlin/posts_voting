@@ -3,16 +3,14 @@
     <h1>Post Vote Board</h1>
     <h3>每位訪客僅能對每一篇文章表達 <%= @limit %> 次意見，請點擊[文章好]或[文章差]按鈕</h3>
     <h2>您好 uuid： <%= session[:visitor_id] %> </h2>
-    <h2>IP: <%= @remote_ip %></h2>
-    <h2>IP2: <%= request.remote_ip %> </h2>
+    <!--<h2>IP: <%= @remote_ip %></h2>-->
+    <!--<h2>IP2: <%= request.remote_ip %> </h2>-->
   </div>
   <div class="row">
   <div class="col-md-12">
 
 
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Posts</h1>
 <%= paginate @posts, outer_window: 3 %>
 <table class="table table-striped">
   <thead>

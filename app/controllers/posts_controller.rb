@@ -134,7 +134,7 @@ class PostsController < ApplicationController
 
    def can_vote_any_more?(post)
     remote_ip = request.env["HTTP_X_FORWARDED_FOR"].split(",")[0] unless request.env["HTTP_X_FORWARDED_FOR"].nil?
-    if remote_ip == ""
+    if remote_ip.nil? || remote_ip == ""
       VoteRecord.where(:uuid => "#{session[:visitor_id]}", :post_id => post.id ).count < Vote_time_limit ? true : false        
     else
       VoteRecord.where(:ip => "#{remote_ip}", :post_id => post.id ).count < Vote_time_limit ? true : false
