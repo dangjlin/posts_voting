@@ -12,7 +12,6 @@
 /tmp
 /.rbenv-vars
 /shared/*
-Gemfile.lock
 /.byebug_history
 /.vscode/*
 
