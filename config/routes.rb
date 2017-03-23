@@ -1,4 +1,24 @@
 Rails.application.routes.draw do
+
+  resources :posts do 
+    member do 
+      post :add_vote
+      post :minus_vote
+    end
+    
+  end
+  
+  get 'dashboard/index'
+  root 'posts#index'
+  
+  namespace :api do
+    resources :events, only: [:index, :create, :update] , :controller => "/events" do
+      collection do
+        get :search
+      end
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

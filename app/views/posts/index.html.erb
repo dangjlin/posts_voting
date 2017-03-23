@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>Post Vote Board</h1>
+    <h3>每位訪客僅能對每一篇文章表達 <%= @limit %> 次意見，請點擊[文章好]或[文章差]按鈕</h3>
+    <h2>您好 uuid： <%= session[:visitor_id] %> </h2>
+    <h2>IP: <%= @remote_ip %></h2>
+    <h2>IP2: <%= request.remote_ip %> </h2>
+  </div>
+  <div class="row">
+  <div class="col-md-12">
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Posts</h1>
+<%= paginate @posts, outer_window: 3 %>
+<table class="table table-striped">
+  <thead>
+    <tr>Title</tr>
+    <tr>
+      <th>Content</th>
+      <th>好</th>
+      <th>不好</th>
+      <th>總分</th>
+      <th colspan="2">投票按鈕</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr class="article-title article-title-<%= post.id %>"><td colspan="9">文章標題：<%= post.title %></td></tr>
+      <tr class=tr-<%= post.id %>>
+        <% if !can_vote_any_more?(post) %>
+        <%=  render partial: 'vote_warning', locals: { vote_limit: @limit } %> 
+        <% end %>
+        <td><%= post.content %></td>
+        <td class=tr-<%= post.id %>-goodvote_number><%= post.goodvote %></td>
+        <td class=tr-<%= post.id %>-badvote_number><%= post.badvote %></td>
+        <td class=tr-<%= post.id %>-total_number><%= post.goodvote - post.badvote %></td>
+        <td>
+          <%= form_for @record, url: add_vote_post_path(post), :html => {:class => "form_vote"} do |f| %>                   
+          <%= button_tag(type: "submit", class: "btn btn-xs btn-info submit-#{post.id}" , name: "commit", disabled: !can_vote_any_more?(post)) do %>          
+            <span class="glyphicon glyphicon-thumbs-up icon-thumbs-up" aria-hidden=\"true\"></span> 文章好
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= form_for @record, url: minus_vote_post_path(post), :html => {:class => "form_vote"} do |f| %>         
+          <%= button_tag(type: "submit", class: "btn btn-xs btn-warning submit-#{post.id}" , name: "commit", disabled: !can_vote_any_more?(post)) do %>          
+            <span class="glyphicon glyphicon-thumbs-down icon-thumbs-down" aria-hidden=\"true\"></span> 文章差
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+              <% post.vote_records.order(:id).reverse.each do |record| %>
+              <tr class=vote-record-block-<%= post.id %> >
+                <td colspan="9" class="vote-comment-block"> <%= record.name %> 說： <%= transform_to_idea_icon(record.idea) %>  @ <%= record.created_at.to_s(:long) %> </td>
+            
+              </tr>
+              <% end %>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @posts, outer_window: 3 %>
+<br>
+<%= link_to 'New Post', new_post_path %>
+  </div>
+  </div>
+</div>  

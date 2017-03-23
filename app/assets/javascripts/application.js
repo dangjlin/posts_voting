@@ -13,4 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+// auto refer to vendor/assets/bower_components/angular folder : automatic refer the same name js file 
 //= require angular
+// auto refer to vendor/assets/bower_components/angular-resource folder : automatic refer the same name js file 
+//= require angular-resource
+//= require angular/app
+//= require angular/events/EventsCtrl
+//= require angular/events/event
+//= require posts

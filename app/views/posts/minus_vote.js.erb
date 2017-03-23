@@ -1,0 +1,8 @@
+<% if @switch %>
+$(".tr-<%= j @post.id.to_s %>").after("<%= j render partial: 'vote_record', locals: { vote_record: @vote_record } %> ");
+$(".tr-<%= j @post.id.to_s %>-badvote_number").text("<%= j @post.badvote.to_s %>");
+$(".tr-<%= j @post.id.to_s %>-total_number").text("<%= j ((@post.goodvote - @post.badvote).to_s) %>");
+<% else %>
+$(".submit-<%= j @post.id.to_s %>").prop('disabled', true);
+$(".article-title-<%= j @post.id.to_s %>").after("<%= j render partial: 'vote_warning', locals: { vote_limit: @limit } %> ");
+<% end %>
