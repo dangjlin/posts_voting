@@ -1,7 +1,7 @@
 class NgpostController < ApplicationController
   layout "angular-layout"
   before_action :set_post, only: [:show, :edit, :update, :destroy, :add_vote, :minus_vote]
-  Vote_time_limit = 6
+  Vote_time_limit = 5
   
   def index
   end

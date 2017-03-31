@@ -4,7 +4,7 @@ var appPost = angular.module("postApp", ['ngSanitize']);
 appPost.controller("PostCtrl", ['$scope','$http', '$filter',  function ($scope, $http , $filter){
     $http.get('post_list').then(function successCallback(data) {
     $scope.posts = data.data;
-    $scope.vote_limit = 6;
+    $scope.vote_limit = 5;
     console.log($scope.posts);    
   });
 
@@ -24,10 +24,14 @@ appPost.controller("PostCtrl", ['$scope','$http', '$filter',  function ($scope, 
       $scope.post.goodvote = data.data[0].goodvote;
       $scope.post.badvote = data.data[0].badvote;
       $scope.post.can_vote_tag = data.data[0].switch;
+      if ($scope.post.can_vote_tag === true) {
+      var vistor = "訪客 " + $scope.connect_ip;
+      $scope.post.vote_records.push({created_at: new Date(),idea: idea.toString() ,name: vistor ,post_id: post.id});
+    };
+      
     });
-    var vistor = "訪客 " + $scope.connect_ip;
-    console.log(new Date());
-    $scope.post.vote_records.push({created_at: new Date(),idea: idea.toString() ,name: vistor ,post_id: post.id});
+
+ 
   
   };  //goodvote end quote
 
@@ -42,11 +46,12 @@ appPost.controller("PostCtrl", ['$scope','$http', '$filter',  function ($scope, 
       $scope.post.goodvote = data.data[0].goodvote;
       $scope.post.badvote = data.data[0].badvote;
       $scope.post.can_vote_tag = data.data[0].switch;
-    });
+     if ($scope.post.can_vote_tag === true) {
      var vistor = "訪客 " + $scope.connect_ip;
-     console.log(new Date());
-   //  $scope.post.vote_records.unshift({created_at: new Date(),idea: idea.toString() ,name:  vistor ,post_id: post.id});
      $scope.post.vote_records.unshift({created_at: new Date(),idea: idea.toString() ,name:  vistor ,post_id: post.id});
+    };
+    });
+
   };
 
 }]);
