@@ -1,0 +1,32 @@
+// Place all the styles related to the ngpost controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.vote-comment-block {
+  padding-left: 100px !important;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+  background-color: #fffacd !important;
+  border-top: 0px !important;
+}
+
+.article-title {
+  background-color: #75eea1 !important;
+  font-size: 16px; 
+}
+
+.vote-warning-block {
+  background-color: #f2a8a8 !important;
+}
+
+.icon-thumbs-up {
+  color: red;
+}
+
+.icon-thumbs-down {
+  color: darkslategray;
+}
+
+ .form-control {
+  padding: 6px 6px 6px 6px !important;
+}
+ 

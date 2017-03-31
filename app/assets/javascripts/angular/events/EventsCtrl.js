@@ -14,7 +14,7 @@
 
   $scope.addEvent = function() {
     if (!valid()) { return false; }
-
+    console.log($scope.event);
     Event.save($scope.event,
       function(response, _headers) {
         $scope.events.push(response);

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS</title>
+    <link data-require="semantic-ui@*" data-semver="0.9.6" rel="stylesheet" href="https://raw.github.com/Semantic-Org/Semantic-UI/0.9.6/build/packaged/css/semantic.min.css" />
+    <script data-require="semantic-ui@*" data-semver="0.9.6" src="https://raw.github.com/Semantic-Org/Semantic-UI/0.9.6/build/packaged/javascript/semantic.min.js"></script>
+
+
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  </head>
+
+  <body ng-controller="StoreController as store">
+
+    <%= yield %>
+
+  </body>
+
+</html>

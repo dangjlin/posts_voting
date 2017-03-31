@@ -1,0 +1,46 @@
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+  <table class="table table-striped">
+  <thead>
+    <tr>Title</tr>
+    <tr>
+      <th>Content</th>
+      <th>好</th>
+      <th>不好</th>
+      <th>總分</th>
+      <th colspan="2">投票按鈕</th>
+      <th colspan="3">文章控制</th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="post in posts">
+      <tr class=article-title>
+        <td colspan='12'> {{post.title}}</td>
+      </tr>
+      <tr ng-model="VoteController.post" ng-hide=post.can_vote_tag>
+        <td colspan="4"></td><td colspan="5" class="vote-warning-block"> 本篇文章你已經投票 {{ vote_limit }} 次，不能再投了 </td>
+      </tr>
+      
+      <tr>
+        <td>{{post.content}}</td>
+        <td>{{post.goodvote}}</td>
+        <td>{{post.badvote}}</td>
+        <td>{{post.goodvote - post.badvote}}  </td>
+        <td><form ng-controller="PostCtrl" ng-submit="goodvote(post,1)"><input type="submit" class="btn btn-primary btn-xs pull-right" value="文章好" ng-disabled="!post.can_vote_tag" ></input></td></form>
+        <td><form ng-controller="PostCtrl" ng-submit="badvote(post,-1)"><input type="submit" class="btn btn-warning btn-xs pull-right" value="文章不好" ng-disabled="!post.can_vote_tag" ></input></td></form></td>       
+
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr ng-repeat="vote in post.vote_records | orderBy: '-id'" class="vote-comment-block">
+        <td colspan='12'  class="vote-comment-block" > {{vote.name}} : <span ng-bind-html=" vote.idea | turntoicon "></span> @ {{ vote.created_at | date:'short'}} </td>
+      </tr>
+  </tbody>
+  </table>
+  
+</div>
+</div>
+</div>

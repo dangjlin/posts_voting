@@ -17,7 +17,11 @@
 //= require angular
 // auto refer to vendor/assets/bower_components/angular-resource folder : automatic refer the same name js file 
 //= require angular-resource
+//= require angular-sanitize
 //= require angular/app
 //= require angular/events/EventsCtrl
 //= require angular/events/event
 //= require posts
+//= require ngpost
+//= require gem_store
+//= require products

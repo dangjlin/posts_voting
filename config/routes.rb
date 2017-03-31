@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  resources :ngpost do 
+    member do
+      post :add_vote
+      post :minus_vote
+    end
+  end
+  
+
+  get 'post_list' => "ngpost#post_list"
+  get 'get_ip' => "ngpost#get_ip"
+  get 'gem_store' => "gem_store#index"
+  
   resources :posts do 
     member do 
       post :add_vote

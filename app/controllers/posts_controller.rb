@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
    before_action :set_post, only: [:show, :edit, :update, :destroy, :add_vote, :minus_vote]
-   Vote_time_limit = 3
+   Vote_time_limit = 5
    helper_method :can_vote_any_more?
    # GET /posts
    # GET /posts.json
    def index
-      @items_per_page = 5
+      @items_per_page = 10
       @posts = Post.all.order(:id).includes(:vote_records).page(params[:page]).per(@items_per_page)
       @record = Post.new
       #if env["HTTP_X_FORWARDED_FOR"] = nil?
